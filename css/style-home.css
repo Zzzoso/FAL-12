@@ -1,6 +1,6 @@
 body {
   background-color: #000;
-  display: flex;
+
   justify-content: center;
   padding: 100px;
 }
@@ -13,14 +13,29 @@ body {
 
 canvas {
   display: block;
+  position: absolute;
 }
 
 button {
-  justify-content: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #000;
   color: rgb(230, 230, 255);
   border: 3px solid rgb(230, 230, 255);
   padding: 10px;
   font-size: 30px;
   font-family: "Source Code Pro", monospace;
+}
+
+a {
+  text-decoration: none;
+}
+
+#logo {
+  display: block;
+  width: 80%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
 }

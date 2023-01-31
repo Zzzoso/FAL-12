@@ -110,7 +110,7 @@ function drawExpressions(detections, x, y, textYSpace) {
     text("anger: ", x, y + textYSpace * 2);
     text("sad: ", x, y + textYSpace * 3);
     text("disgusted: ", x, y + textYSpace * 4);
-    text("surprised: ", x, y + textYSpace * 5);
+    text("surprise: ", x, y + textYSpace * 5);
     text("fear: ", x, y + textYSpace * 6);
   }
 }
