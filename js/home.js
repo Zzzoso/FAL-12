@@ -1,5 +1,4 @@
 let button;
-let logo = select("#logo");
 
 function setup() {
   noCanvas();
@@ -10,7 +9,11 @@ function draw() {
   button = select("#bottone-home");
   button.mouseOver(changeStyle);
   button.mouseOut(resetStyle);
-  logo.tint(255, 100, 150);
+  tint(0, 153, 204);
+  let logo = select("#logo");
+  logo.tint(200, 201, 102, 255);
+
+  console.log(logo);
 }
 
 function changeStyle() {
