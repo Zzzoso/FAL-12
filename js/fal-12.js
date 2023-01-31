@@ -26,6 +26,7 @@ function setup() {
 
 function faceReady() {
   faceapi.detect(gotFaces); // Start detecting faces: 顔認識開始
+  console.log(detections);
 }
 
 // Got faces: 顔を検知
@@ -52,7 +53,7 @@ function drawBoxs(detections) {
     for (f = 0; f < detections.length; f++) {
       let { _x, _y, _width, _height } = detections[f].alignedRect._box;
       stroke(44, 169, 225);
-      strokeWeight(1);
+      strokeWeight(3);
       noFill();
       //rect(_x, _y, _width, _height);
     }
@@ -66,7 +67,7 @@ function drawLandmarks(detections) {
       let points = detections[f].landmarks.positions;
       for (let i = 0; i < points.length; i++) {
         stroke(255, 0, 0);
-        strokeWeight(1);
+        strokeWeight(2);
         point(points[i]._x, points[i]._y);
       }
     }
@@ -78,10 +79,10 @@ function drawExpressions(detections, x, y, textYSpace) {
     //If at least 1 face is detected: もし1つ以上の顔が検知されていたら
     let { neutral, happy, angry, sad, disgusted, surprised, fearful } =
       detections[0].expressions;
-    textFont("Helvetica Neue");
+    textFont("Menlo, Monaco, 'Courier New', monospace");
     textSize(14);
     noStroke();
-    fill(0);
+    fill(255, 0, 0);
 
     text("neutral:       " + nf(neutral * 100, 2, 2) + "%", x, y);
     text("happiness: " + nf(happy * 100, 2, 2) + "%", x, y + textYSpace);

@@ -1,9 +1,11 @@
 body {
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 50);
 }
 
 #canvas {
   position: relative;
+  margin-left: auto;
+  margin-right: auto;
   top: 10px;
   left: 0px;
   z-index: 1;
@@ -16,4 +18,20 @@ body {
   z-index: 0;
   border: 3px #fff solid;
   border-radius: 10px;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  padding: 100px;
+}
+
+button {
+  justify-content: center;
+  background-color: #000;
+  color: rgb(230, 230, 255);
+  border: 3px solid rgb(230, 230, 255);
+  padding: 10px;
+  font-size: 30px;
+  font-family: "Source Code Pro", monospace;
 }

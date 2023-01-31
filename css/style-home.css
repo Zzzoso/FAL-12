@@ -1,8 +1,26 @@
-html, body {
+body {
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  padding: 100px;
+}
+
+html,
+body {
   margin: 0;
   padding: 0;
 }
 
 canvas {
   display: block;
+}
+
+button {
+  justify-content: center;
+  background-color: #000;
+  color: rgb(230, 230, 255);
+  border: 3px solid rgb(230, 230, 255);
+  padding: 10px;
+  font-size: 30px;
+  font-family: "Source Code Pro", monospace;
 }
