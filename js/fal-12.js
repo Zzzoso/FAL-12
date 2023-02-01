@@ -5,7 +5,7 @@ let video;
 let canvas;
 
 function setup() {
-  canvas = createCanvas(480, 360);
+  canvas = createCanvas(480 * 2, 360 * 2);
   canvas.id("canvas");
 
   video = createCapture(VIDEO); // Creat the video: ビデオオブジェクトを作る
@@ -52,10 +52,10 @@ function drawBoxs(detections) {
     //If at least 1 face is detected: もし1つ以上の顔が検知されていたら
     for (f = 0; f < detections.length; f++) {
       let { _x, _y, _width, _height } = detections[f].alignedRect._box;
-      stroke(44, 169, 225);
-      strokeWeight(3);
+      stroke(0, 255, 0, 100);
+      strokeWeight(1);
       noFill();
-      //rect(_x, _y, _width, _height);
+      rect(_x, _y, _width, _height);
     }
   }
 }
@@ -66,8 +66,8 @@ function drawLandmarks(detections) {
     for (f = 0; f < detections.length; f++) {
       let points = detections[f].landmarks.positions;
       for (let i = 0; i < points.length; i++) {
-        stroke(255, 0, 0);
-        strokeWeight(2);
+        stroke(0, 255, 0);
+        strokeWeight(4);
         point(points[i]._x, points[i]._y);
       }
     }
@@ -82,35 +82,49 @@ function drawExpressions(detections, x, y, textYSpace) {
     textFont("Menlo, Monaco, 'Courier New', monospace");
     textSize(14);
     noStroke();
-    fill(255, 0, 0);
+    fill(0, 255, 0);
 
     text("neutral:       " + nf(neutral * 100, 2, 2) + "%", x, y);
-    text("happiness: " + nf(happy * 100, 2, 2) + "%", x, y + textYSpace);
-    text("anger:        " + nf(angry * 100, 2, 2) + "%", x, y + textYSpace * 2);
-    text("sad:            " + nf(sad * 100, 2, 2) + "%", x, y + textYSpace * 3);
     text(
-      "disgusted: " + nf(disgusted * 100, 2, 2) + "%",
+      "happiness:     " + nf(happy * 100, 2, 2) + "%",
+      x,
+      y + textYSpace * 2
+    );
+    text(
+      "anger:         " + nf(angry * 100, 2, 2) + "%",
       x,
       y + textYSpace * 4
     );
+    text("sad:           " + nf(sad * 100, 2, 2) + "%", x, y + textYSpace * 6);
     text(
-      "surprised:  " + nf(surprised * 100, 2, 2) + "%",
+      "disgusted:     " + nf(disgusted * 100, 2, 2) + "%",
       x,
-      y + textYSpace * 5
+      y + textYSpace * 8
     );
     text(
-      "fear:           " + nf(fearful * 100, 2, 2) + "%",
+      "surprised:     " + nf(surprised * 100, 2, 2) + "%",
       x,
-      y + textYSpace * 6
+      y + textYSpace * 10
+    );
+    text(
+      "fear:          " + nf(fearful * 100, 2, 2) + "%",
+      x,
+      y + textYSpace * 12
     );
   } else {
     //If no faces is detected: 顔が1つも検知されていなかったら
     text("neutral: ", x, y);
-    text("happiness: ", x, y + textYSpace);
-    text("anger: ", x, y + textYSpace * 2);
-    text("sad: ", x, y + textYSpace * 3);
-    text("disgusted: ", x, y + textYSpace * 4);
-    text("surprise: ", x, y + textYSpace * 5);
-    text("fear: ", x, y + textYSpace * 6);
+    text("happiness: ", x, y + textYSpace * 2);
+    text("anger: ", x, y + textYSpace * 4);
+    text("sad: ", x, y + textYSpace * 6);
+    text("disgusted: ", x, y + textYSpace * 8);
+    text("surprise: ", x, y + textYSpace * 10);
+    text("fear: ", x, y + textYSpace * 12);
   }
 }
+
+//function keyPressed() {
+//  if (keyPressed) {
+//    saveCanvas("capolavoro.jpg");
+//  }
+//}
