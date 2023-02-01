@@ -8,7 +8,7 @@ let angle = 0;
 let txt;
 
 function setup() {
-  canvas = createCanvas(480 * 2, 360 * 2);
+  canvas = createCanvas(480 * 1.8, 360 * 1.8);
   canvas.id("canvas");
 
   video = createCapture(VIDEO); // Creat the video: ビデオオブジェクトを作る
@@ -167,5 +167,9 @@ function draw() {
 
   if (angle > 2) {
     loader.style.display = "none";
+  }
+
+  function Scrolldown() {
+    window.scroll(0, 75);
   }
 }
