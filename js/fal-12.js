@@ -153,7 +153,7 @@ function draw() {
   if (counter < 0) {
     txt.html("cheeeeeeeeeese");
   } else if (counter > 0) {
-    txt.html("schiaccia un tasto per salvare");
+    txt.html("schiaccia⋅un⋅tasto⋅per⋅salvare");
   }
 
   // -------------------------------------------------
@@ -167,9 +167,5 @@ function draw() {
 
   if (angle > 2) {
     loader.style.display = "none";
-  }
-
-  function Scrolldown() {
-    window.scroll(0, 75);
   }
 }

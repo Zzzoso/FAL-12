@@ -5,6 +5,12 @@ let bianco;
 let colore;
 let angle = 0;
 
+let font;
+
+function preload() {
+  font = loadFont("font/ELEKTRA_.ttf");
+}
+
 function setup() {
   noCanvas();
 }
@@ -16,6 +22,7 @@ function draw() {
   button = select("#bottone-home");
 
   //button.mouseOut(resetStyle);
+  textFont(font);
 
   stileButton();
   button.mouseOver(changeStyle);

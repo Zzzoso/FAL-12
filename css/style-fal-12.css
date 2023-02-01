@@ -25,14 +25,14 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 2em;
-  margin-bottom: 2em;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
   background-color: #000;
   color: rgb(0, 255, 0);
   border: 0.1px solid rgb(0, 255, 0);
   padding: 10px;
-  font-size: 10px;
-  font-family: "Source Code Pro", monospace;
+  font-size: 12px;
+  font-family: "ELEKTRA";
 }
 
 a {
@@ -68,4 +68,13 @@ a {
   background-size: 30%; /*  scala gif */
   height: 100vh;
   width: 100%;
+}
+
+@font-face {
+  font-family: "ELEKTRA";
+  src: url("../font/ELEKTRA_.ttf");
+}
+
+#text {
+  font-family: "ELEKTRA";
 }
