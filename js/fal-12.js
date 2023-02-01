@@ -4,6 +4,9 @@ let detections = [];
 let video;
 let canvas;
 
+let angle = 0;
+let txt;
+
 function setup() {
   canvas = createCanvas(480 * 2, 360 * 2);
   canvas.id("canvas");
@@ -22,6 +25,9 @@ function setup() {
 
   //Initialize the model: モデルの初期化
   faceapi = ml5.faceApi(video, faceOptions, faceReady);
+
+  txt = createP("Ciao!");
+  txt.id("text");
 }
 
 function faceReady() {
@@ -79,52 +85,87 @@ function drawExpressions(detections, x, y, textYSpace) {
     //If at least 1 face is detected: もし1つ以上の顔が検知されていたら
     let { neutral, happy, angry, sad, disgusted, surprised, fearful } =
       detections[0].expressions;
+    nfneutral = nf(neutral * 100, 2, 2);
     textFont("Menlo, Monaco, 'Courier New', monospace");
     textSize(14);
     noStroke();
     fill(0, 255, 0);
 
-    text("neutral:       " + nf(neutral * 100, 2, 2) + "%", x, y);
+    text("   neutral:       " + nfneutral + "%", x, y + textYSpace * 2);
+
     text(
-      "happiness:     " + nf(happy * 100, 2, 2) + "%",
-      x,
-      y + textYSpace * 2
-    );
-    text(
-      "anger:         " + nf(angry * 100, 2, 2) + "%",
+      "   happiness:     " + nf(happy * 100, 2, 2) + "%",
       x,
       y + textYSpace * 4
     );
-    text("sad:           " + nf(sad * 100, 2, 2) + "%", x, y + textYSpace * 6);
+
     text(
-      "disgusted:     " + nf(disgusted * 100, 2, 2) + "%",
+      "   anger:         " + nf(angry * 100, 2, 2) + "%",
+      x,
+      y + textYSpace * 6
+    );
+    text(
+      "   sad:           " + nf(sad * 100, 2, 2) + "%",
       x,
       y + textYSpace * 8
     );
     text(
-      "surprised:     " + nf(surprised * 100, 2, 2) + "%",
+      "   disgusted:     " + nf(disgusted * 100, 2, 2) + "%",
       x,
       y + textYSpace * 10
     );
     text(
-      "fear:          " + nf(fearful * 100, 2, 2) + "%",
+      "   surprised:     " + nf(surprised * 100, 2, 2) + "%",
       x,
       y + textYSpace * 12
     );
+    text(
+      "   fear:          " + nf(fearful * 100, 2, 2) + "%",
+      x,
+      y + textYSpace * 14
+    );
   } else {
     //If no faces is detected: 顔が1つも検知されていなかったら
-    text("neutral: ", x, y);
-    text("happiness: ", x, y + textYSpace * 2);
-    text("anger: ", x, y + textYSpace * 4);
-    text("sad: ", x, y + textYSpace * 6);
-    text("disgusted: ", x, y + textYSpace * 8);
-    text("surprise: ", x, y + textYSpace * 10);
-    text("fear: ", x, y + textYSpace * 12);
+    text("   neutral: ", x, y + textYSpace * 2);
+    text("   happiness: ", x, y + textYSpace * 4);
+    text("   anger: ", x, y + textYSpace * 6);
+    text("   sad: ", x, y + textYSpace * 8);
+    text("   disgusted: ", x, y + textYSpace * 10);
+    text("   surprise: ", x, y + textYSpace * 12);
+    text("   fear: ", x, y + textYSpace * 14);
   }
 }
 
-//function keyPressed() {
-//  if (keyPressed) {
-//    saveCanvas("capolavoro.jpg");
-//  }
-//}
+function keyPressed() {
+  if (keyPressed) {
+    saveCanvas("capolavoro.jpg");
+  }
+}
+
+var loader = document.getElementById("preloader");
+
+function draw() {
+  // contatore che fa cambiare contenuto al paragrafo
+
+  angle = angle + 0.02;
+  let counter = sin(angle);
+
+  if (counter < 0) {
+    txt.html("cheeeeeeeeeese");
+  } else if (counter > 0) {
+    txt.html("schiaccia un tasto per salvare");
+  }
+
+  // -------------------------------------------------
+
+  let r = 0;
+  let g = 255 * abs(sin(angle));
+  let b = 0;
+  let a = 100;
+  let col = color(r, g, b, a);
+  txt.style("color", col);
+
+  if (angle > 2) {
+    loader.style.display = "none";
+  }
+}
