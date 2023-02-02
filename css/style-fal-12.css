@@ -12,16 +12,7 @@ body {
   border: 0.1px solid rgb(0, 255, 0);
 }
 
-#video {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 0;
-  border: 3px #fff solid;
-  border-radius: 10px;
-}
-
-#bottone-fal {
+#bottone-feel {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -40,19 +31,18 @@ a {
 }
 
 #text {
+  /*---------- posizione -----------*/
+
   margin-top: 20px;
   position: absolute;
-  top: 13%; /* position the top  edge of the element at the middle of the parent */
-  left: 50%; /* position the left edge of the element at the middle of the parent */
-
-  transform: translate(
-    -50%,
-    -50%
-  ); /* This is a shorthand of
-                                       translateX(-50%) and translateY(-50%) */
-
+  top: 13%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   padding: 15px;
-  font-family: "Source Code Pro", monospace;
+
+  /*--------------------------------*/
+
+  font-family: "ELEKTRA";
   font-weight: 500;
   font-size: 2vw;
   display: flex;
@@ -62,7 +52,7 @@ a {
 }
 
 #preloader {
-  z-index: 100;
+  z-index: 2;
   position: fixed;
   background: #000 url(/assets/preloader-2.gif) no-repeat center center;
   background-size: 20%; /*  scala gif */
@@ -73,8 +63,4 @@ a {
 @font-face {
   font-family: "ELEKTRA";
   src: url("../font/ELEKTRA_.ttf");
-}
-
-#text {
-  font-family: "ELEKTRA";
 }

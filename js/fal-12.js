@@ -4,18 +4,16 @@ let detections = [];
 let video;
 let canvas;
 
-let angle = 0;
-let txt;
-
 function setup() {
   canvas = createCanvas(480 * 1.8, 360 * 1.8);
   canvas.id("canvas");
 
-  video = createCapture(VIDEO); // Creat the video: ビデオオブジェクトを作る
+  video = createCapture(VIDEO); // video input
   video.id("video");
   video.size(width, height);
   video.hide();
 
+  //impostazioni di ml5.faceapi
   const faceOptions = {
     withLandmarks: true,
     withExpressions: true,
@@ -23,39 +21,38 @@ function setup() {
     minConfidence: 0.5,
   };
 
-  //Initialize the model: モデルの初期化
-  faceapi = ml5.faceApi(video, faceOptions, faceReady);
+  faceapi = ml5.faceApi(video, faceOptions, faceReady); //oggetto clue della libreria
 
   txt = createP("Ciao!");
   txt.id("text");
 }
 
 function faceReady() {
-  faceapi.detect(gotFaces); // Start detecting faces: 顔認識開始
+  faceapi.detect(gotFaces); // Start detecting faces
   console.log(detections);
 }
 
-// Got faces: 顔を検知
 function gotFaces(error, result) {
+  // Got faces
   if (error) {
     console.log(error);
     return;
   }
 
-  detections = result; //Now all the data in this detections: 全ての検知されたデータがこのdetectionの中に
-  // console.log(detections);
+  detections = result; //storing datas in detections[]
 
-  clear(); //Draw transparent background;: 透明の背景を描く
-  drawBoxs(detections); //Draw detection box: 顔の周りの四角の描画
-  drawLandmarks(detections); //// Draw all the face points: 全ての顔のポイントの描画
-  drawExpressions(detections, 20, 250, 14); //Draw face expression: 表情の描画
+  clear(); //no bg
 
-  faceapi.detect(gotFaces); // Call the function again at here: 認識実行の関数をここでまた呼び出す
+  drawBoxs(detections); //Draw detection box
+  drawLandmarks(detections); //// Draw all the face points
+  drawExpressions(detections, 10, 30, 14); //Draw face expression text
+
+  faceapi.detect(gotFaces); // Calling the function again
 }
 
 function drawBoxs(detections) {
   if (detections.length > 0) {
-    //If at least 1 face is detected: もし1つ以上の顔が検知されていたら
+    //If at least 1 face is detected
     for (f = 0; f < detections.length; f++) {
       let { _x, _y, _width, _height } = detections[f].alignedRect._box;
       stroke(0, 255, 0);
@@ -68,7 +65,7 @@ function drawBoxs(detections) {
 
 function drawLandmarks(detections) {
   if (detections.length > 0) {
-    //If at least 1 face is detected: もし1つ以上の顔が検知されていたら
+    //If at least 1 face is detected
     for (f = 0; f < detections.length; f++) {
       let points = detections[f].landmarks.positions;
       for (let i = 0; i < points.length; i++) {
@@ -82,67 +79,60 @@ function drawLandmarks(detections) {
 
 function drawExpressions(detections, x, y, textYSpace) {
   if (detections.length > 0) {
-    //If at least 1 face is detected: もし1つ以上の顔が検知されていたら
+    //If at least 1 face is detected
     let { neutral, happy, angry, sad, disgusted, surprised, fearful } =
       detections[0].expressions;
-    nfneutral = nf(neutral * 100, 2, 2);
+
     textFont("Menlo, Monaco, 'Courier New', monospace");
-    textSize(14);
+    textSize(12);
     noStroke();
     fill(0, 255, 0);
 
-    text("   neutral:       " + nfneutral + "%", x, y + textYSpace * 2);
+    text("   neutral:     " + nf(neutral * 100, 2, 2) + "%", x, y + textYSpace);
 
     text(
-      "   happiness:     " + nf(happy * 100, 2, 2) + "%",
+      "   happiness:   " + nf(happy * 100, 2, 2) + "%",
       x,
-      y + textYSpace * 4
+      y + textYSpace * 2
     );
 
     text(
-      "   anger:         " + nf(angry * 100, 2, 2) + "%",
+      "   anger:       " + nf(angry * 100, 2, 2) + "%",
+      x,
+      y + textYSpace * 3
+    );
+    text("   sad:         " + nf(sad * 100, 2, 2) + "%", x, y + textYSpace * 4);
+    text(
+      "   disgusted:   " + nf(disgusted * 100, 2, 2) + "%",
+      x,
+      y + textYSpace * 5
+    );
+    text(
+      "   surprised:   " + nf(surprised * 100, 2, 2) + "%",
       x,
       y + textYSpace * 6
     );
     text(
-      "   sad:           " + nf(sad * 100, 2, 2) + "%",
+      "   fear:        " + nf(fearful * 100, 2, 2) + "%",
       x,
-      y + textYSpace * 8
-    );
-    text(
-      "   disgusted:     " + nf(disgusted * 100, 2, 2) + "%",
-      x,
-      y + textYSpace * 10
-    );
-    text(
-      "   surprised:     " + nf(surprised * 100, 2, 2) + "%",
-      x,
-      y + textYSpace * 12
-    );
-    text(
-      "   fear:          " + nf(fearful * 100, 2, 2) + "%",
-      x,
-      y + textYSpace * 14
+      y + textYSpace * 7
     );
   } else {
-    //If no faces is detected: 顔が1つも検知されていなかったら
-    text("   neutral: ", x, y + textYSpace * 2);
-    text("   happiness: ", x, y + textYSpace * 4);
-    text("   anger: ", x, y + textYSpace * 6);
-    text("   sad: ", x, y + textYSpace * 8);
-    text("   disgusted: ", x, y + textYSpace * 10);
-    text("   surprise: ", x, y + textYSpace * 12);
-    text("   fear: ", x, y + textYSpace * 14);
-  }
-}
-
-function keyPressed() {
-  if (keyPressed) {
-    saveCanvas("capolavoro.jpg");
+    //If no faces is detected:
+    text("   neutral: ", x, y + textYSpace * 1);
+    text("   happiness: ", x, y + textYSpace * 2);
+    text("   anger: ", x, y + textYSpace * 3);
+    text("   sad: ", x, y + textYSpace * 4);
+    text("   disgusted: ", x, y + textYSpace * 5);
+    text("   surprise: ", x, y + textYSpace * 6);
+    text("   fear: ", x, y + textYSpace * 7);
   }
 }
 
 var loader = document.getElementById("preloader");
+
+let angle = 0;
+let txt;
 
 function draw() {
   // contatore che fa cambiare contenuto al paragrafo
@@ -167,5 +157,11 @@ function draw() {
 
   if (angle > 4) {
     loader.style.display = "none";
+  }
+}
+
+function keyPressed() {
+  if (keyPressed) {
+    saveCanvas("FE⋅E⋅L⋅12 - capolavoro.jpg");
   }
 }
