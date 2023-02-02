@@ -21,25 +21,24 @@ function draw() {
 
   button = select("#bottone-home");
 
-  //button.mouseOut(resetStyle);
   textFont(font);
 
   stileButton();
-  button.mouseOver(changeStyle);
+  // button.mouseOver(changeStyle);
 
   verde = color(0, 255, 0, 255);
   bianco = color(255, 255, 255, 255);
   colore = lerpColor(verde, bianco, abs(sin(angle)));
 }
-function stileButton(yes, no) {
-  button.style("color", colore);
-  button.style("border-color", colore);
-}
-
-function changeStyle() {
+function stileButton() {
   button.style("color", verde);
   button.style("border-color", verde);
 }
+
+//function changeStyle() {
+//  button.style("color", verde);
+//  button.style("border-color", verde);
+//}
 
 //function resetStyle() {
 //  stileButton;

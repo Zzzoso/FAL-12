@@ -58,8 +58,8 @@ function drawBoxs(detections) {
     //If at least 1 face is detected: もし1つ以上の顔が検知されていたら
     for (f = 0; f < detections.length; f++) {
       let { _x, _y, _width, _height } = detections[f].alignedRect._box;
-      stroke(0, 255, 0, 100);
-      strokeWeight(1);
+      stroke(0, 255, 0);
+      strokeWeight(0.7);
       noFill();
       rect(_x, _y, _width, _height);
     }
@@ -72,8 +72,8 @@ function drawLandmarks(detections) {
     for (f = 0; f < detections.length; f++) {
       let points = detections[f].landmarks.positions;
       for (let i = 0; i < points.length; i++) {
-        stroke(0, 255, 0);
-        strokeWeight(4);
+        stroke(255, 255, 255);
+        strokeWeight(2);
         point(points[i]._x, points[i]._y);
       }
     }
@@ -151,9 +151,9 @@ function draw() {
   let counter = sin(angle);
 
   if (counter < 0) {
-    txt.html("cheeeeeeeeeese");
+    txt.html("schiaccia . Un . Tasto . Per . Salvare");
   } else if (counter > 0) {
-    txt.html("schiaccia⋅un⋅tasto⋅per⋅salvare");
+    txt.html("cheeeeeeeeeeese");
   }
 
   // -------------------------------------------------
@@ -165,7 +165,7 @@ function draw() {
   let col = color(r, g, b, a);
   txt.style("color", col);
 
-  if (angle > 2) {
+  if (angle > 4) {
     loader.style.display = "none";
   }
 }
